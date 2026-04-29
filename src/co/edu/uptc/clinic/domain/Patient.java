@@ -1,5 +1,5 @@
 //Se cabmio temporalmente el nombre de la carpeta
-package co.edu.uptc.clinic.dominio;
+package co.edu.uptc.clinic.domain;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
