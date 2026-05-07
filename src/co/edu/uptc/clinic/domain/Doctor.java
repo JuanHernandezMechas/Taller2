@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Doctor implements Comparable<Doctor>{
     
 	/** Atributo que determina el tipo de identificación del médico */
-	private IdentificationEnums identificationEnums;
+	private IdentificationEnum identificationEnums;
 	
 	/** Atributo que determina el id médico */
     private Integer medicalId;
@@ -46,7 +46,7 @@ public class Doctor implements Comparable<Doctor>{
      * @param specialty Parámetro que determina la especialidad del médico
      * @param yearsOfExperience Parámetro que determina los años de experiencia
      */
-	public Doctor(IdentificationEnums identificationEnum, int medicalId, String firstName, String lastName,
+	public Doctor(IdentificationEnum identificationEnum, int medicalId, String firstName, String lastName,
 			String specialty, Integer yearsOfExperience) {
 		super();
 		this.identificationEnums = identificationEnums;
@@ -61,7 +61,7 @@ public class Doctor implements Comparable<Doctor>{
      * <b>Descripción: </b> Retorna el tipo de identificación del médico <br>
      * @return identificationType Tipo de identificación del médico
      */
-	public IdentificationEnums getIdentificationType() {
+	public IdentificationEnum getIdentificationType() {
 		return identificationEnums;
 	}
 
@@ -69,7 +69,7 @@ public class Doctor implements Comparable<Doctor>{
      * <b>Descripción: </b> Asigna el tipo de identificación del médico <br>
      * @param identificationType Nuevo tipo de identificación
      */
-	public void setIdentificationType(IdentificationEnums identificationEnum) {
+	public void setIdentificationType(IdentificationEnum identificationEnum) {
 		this.identificationEnums = identificationEnums;
 	}
 	
