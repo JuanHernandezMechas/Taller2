@@ -28,7 +28,7 @@ public class Patient {
 	/**Atributo alfanumerico que determina los apellidos del paciente*/
 	private String lastName;
 	/**Atributo alfanumerico que ordena y guarda el correo del paciente*/
-	private Set<String> email = new HashSet<String>();
+	private String email;
 	/**Atributo que ordena y guarda el historial de medicación recetada al paciente 
 	 * en orden de inserción*/
 	private Set<String> medicationHistory = new LinkedHashSet<String>();
@@ -50,7 +50,7 @@ public class Patient {
 	 * @param medicationHistory Parámetro que determina
 	 */
 	public Patient(PriorityEnum priorityEnums, IdentificationEnum identificationEnums, Integer idPatient,
-			String firstName, String lastName, Set<String> email, Set<String> medicationHistory) {
+			String firstName, String lastName, String email, Set<String> medicationHistory) {
 		super();
 		this.priorityEnums = priorityEnums;
 		this.identificationEnums = identificationEnums;
@@ -132,13 +132,13 @@ public class Patient {
 	/**<b>Description: </b>Método encargado de retornar el valor del email del paciente
 	 * @return the email
 	 */
-	public Set<String> getEmail() {
+	public String getEmail() {
 		return email;
 	}
 	/**<b>Description: </b>Método encargado de establecer el valor del email del paciente
 	 * @param email the email to set
 	 */
-	public void setEmail(Set<String> email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	/**<b>Description: </b>Método encargado de retornar el valor del historial de medicamentos 
