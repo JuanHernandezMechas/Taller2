@@ -1,7 +1,6 @@
 package co.edu.uptc.clinic.ui;
 
 import co.edu.uptc.clinic.service.*;
-import co.edu.uptc.laguito.domain.MedicalAppointment;
 import co.edu.uptc.clinic.domain.*;
 import co.edu.uptc.clinic.enums.*;
 import javax.swing.JOptionPane;
@@ -130,12 +129,12 @@ public class Main {
 		}
 	}
 
-/**
- * <b>Descripción: </b> Solicita al usuario mediante ventanas emergentes los
- * datos necesarios para registrar un nuevo médico en el sistema. Muestra un
- * mensaje de éxito o error según el resultado del registro <br>
- */
-public void registrarMedico() {
+	/**
+ 	* <b>Descripción: </b> Solicita al usuario mediante ventanas emergentes los
+ 	* datos necesarios para registrar un nuevo médico en el sistema. Muestra un
+ 	* mensaje de éxito o error según el resultado del registro <br>
+ 	*/
+	public void registrarMedico() {
 	String[] tipos = {"CC - Cédula de ciudadanía", "TI - Tarjeta de identidad", "CE - Cédula de extranjería", "PA - Pasaporte"};
 	int tipoIndex = JOptionPane.showOptionDialog(null, "Seleccione el tipo de identificación:", "Registrar Médico", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, tipos, tipos[0]);
 	if(tipoIndex == -1) {
@@ -153,15 +152,15 @@ public void registrarMedico() {
 		JOptionPane.showMessageDialog(null, "Médico registrado exitosamente.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
 	} else {
 		JOptionPane.showMessageDialog(null, "No se puedo registrar al médico. El ID o los datos son inválidos para el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
-}
-/**
- * <b>Descripción: </b> Solicita al usuario mediante ventanas emergentes los
- * datos necesarios para registrar una nueva cita médica en el sistema.
- * Verifica que el paciente y el médico existan antes de crear la cita.
- * Muestra un mensaje de éxito o error según el resultado del registro 
- */
-public void registrarCita() {
+	/**
+	 * <b>Descripción: </b> Solicita al usuario mediante ventanas emergentes los
+	 * datos necesarios para registrar una nueva cita médica en el sistema.
+	 * Verifica que el paciente y el médico existan antes de crear la cita.
+	 * Muestra un mensaje de éxito o error según el resultado del registro 
+	 */
+	public void registrarCita() {
 	int idCita = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ID de la cita:", "Registrar cita", JOptionPane.PLAIN_MESSAGE));
 	LocalTime hora = LocalTime.parse(JOptionPane.showInputDialog(null, "Ingrese la hora de la cita (formato HH:mm):", "Registrar Cita", JOptionPane.PLAIN_MESSAGE));
 	
@@ -176,21 +175,21 @@ public void registrarCita() {
     if (doctor == null) {
         JOptionPane.showMessageDialog(null, "El médico con el id " + idMedico + " no existe.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
-    }
-    MedicalAppointment appointment = new MedicalAppointment(idCita, hora, patient, doctor);
-    if (appointmentService.addAppointment(appointment)) {
+    	}
+    	MedicalAppointment appointment = new MedicalAppointment(idCita, hora, patient, doctor);
+    		if (appointmentService.addAppointment(appointment)) {
         JOptionPane.showMessageDialog(null, "La cita ha sido registrada exitosamente.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
-    } else {
+    		} else {
         JOptionPane.showMessageDialog(null, "No se pudo registrar. El ID de la cita ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-}
+    	}
+	}
 /**
  * <b>Descripción: </b> Solicita al usuario el identificador del paciente y el
  * nombre del medicamento a agregar en su historial. Muestra un mensaje de éxito
  * o error según el resultado de la operación <br>
  */
 
-public void agregarMedicamento() {
+	public void agregarMedicamento() {
 	int idPaciente = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id del paciente:", "Agregar Medicamento", JOptionPane.PLAIN_MESSAGE));
 	String medicamento = JOptionPane.showInputDialog(null, "Ingrese el nombre del medicamento:", "Agregar Medicamento", JOptionPane.PLAIN_MESSAGE);
 	
@@ -206,7 +205,7 @@ public void agregarMedicamento() {
  * prioridad del paciente. Si no hay citas registradas muestra un aviso al
  * usuario <br>
  */
-public void verColaAtencion(){
+	public void verColaAtencion(){
 	TreeSet<MedicalAppointment> cola = appointmentService.findAllByTimeAndPriority();
 
     if (cola.isEmpty()) {
@@ -229,6 +228,31 @@ public void verColaAtencion(){
     JOptionPane.showMessageDialog(null, sb.toString(), 
         "Cola de Atención", JOptionPane.INFORMATION_MESSAGE);
 }
+/**
+ * <b>Descripción: </b> Consulta y muestra el reporte de médicos ordenados por
+ * años de experiencia de forma ascendente y en caso de empate por nombre
+ * completo de forma ascendente. Si no hay médicos registrados muestra un aviso
+ * al usuario <br>
+ */
+	public void verReporteMedicos() {
+	TreeSet<Doctor> medicos = doctorService.findAllByExperience();
 
+    if (medicos.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "No hay médicos registrados.", 
+            "Reporte de Médicos", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+    StringBuilder sb = new StringBuilder("===== Reporte de Médicos por Experiencia =====\n\n");
+    int numero = 1;
+    for (Doctor doctor : medicos) {
+        sb.append(numero++).append(". ")
+          .append(doctor.getFirstName()).append(" ").append(doctor.getLastName())
+          .append(" | Especialidad: ").append(doctor.getSpecialty())
+          .append(" | Experiencia: ").append(doctor.getYearsOfExperience())
+          .append(" año(s)\n");
+    }
+    JOptionPane.showMessageDialog(null, sb.toString(), 
+        "Reporte de Médicos", JOptionPane.INFORMATION_MESSAGE);
+	}
 }
 	
