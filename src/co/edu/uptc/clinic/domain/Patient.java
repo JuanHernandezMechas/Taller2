@@ -16,7 +16,6 @@ import co.edu.uptc.clinic.enums.PriorityEnum;
  * @author JuanP_Mechas
  * */
 public class Patient {
-	
 	/**
 	 * Atributo Enumerativo que determina el nivel de prioridad de atencion*/
 	private PriorityEnum priorityEnums;
@@ -39,9 +38,6 @@ public class Patient {
 	public Patient() {
 		super();
 	}
-	
-	
-
 	/**
 	 * Crea una nueva instancia de Patient.
 	 *
@@ -64,9 +60,6 @@ public class Patient {
 		this.email = email;
 		this.medicationHistory = medicationHistory;
 	}
-
-
-
 	/**
 	 * <b>Description: </b>Método encargado de retornar el valor de priorityEnums.
 	 *

@@ -22,7 +22,6 @@ public class DoctorRepository {
 			super();
 			this.doctors = new HashMap<>();
 		}
-
 		/**
 	     * <b>Descripción: </b> Agrega un médico al sistema. La validación de
 	     * unicidad del identificador es responsabilidad de la capa de servicio <br>
@@ -33,7 +32,6 @@ public class DoctorRepository {
 			doctors.put(doctor.getMedicalId(), doctor);
 			return true;
 		}
-
 		/**
 	     * <b>Descripción: </b> Verifica si ya existe un médico registrado con
 	     * el identificador dado <br>
@@ -43,7 +41,6 @@ public class DoctorRepository {
 		public boolean existsById(Integer medicalId) {
 			return doctors.containsKey(medicalId);
 		}
-
 		/**
 	     * <b>Descripción: </b> Retorna todos los médicos registrados en el sistema <br>
 	     * @return HashMap con todos los médicos registrados
@@ -51,7 +48,6 @@ public class DoctorRepository {
 		public HashMap<Integer, Doctor> findAll() {
 			return doctors;
 		}
-
 		/**
 	     * <b>Descripción: </b> Busca y retorna un médico por su número de identificación médica <br>
 	     * @param medicalId Parámetro que determina el número de identificación médica
@@ -60,5 +56,4 @@ public class DoctorRepository {
 		public Doctor findById(Integer medicalId) {
 			return doctors.get(medicalId);
 		}
-
 	}

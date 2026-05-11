@@ -20,7 +20,6 @@ import java.util.HashMap;
 	public AppointmentRepository() {
 		this.appointments = new HashMap<>();
 	}
-
 	/**
      * <b>Descripción: </b> Agrega una cita médica al sistema. La validación de
      * unicidad del identificador es responsabilidad de la capa de servicio <br>
@@ -31,7 +30,6 @@ import java.util.HashMap;
 		appointments.put(appointment.getIdMedicalAppointment(), appointment);
 		return true;
 	}
-
 	/**
      * <b>Descripción: </b> Verifica si ya existe una cita médica registrada con el identificador dado <br>
      * @param idMedicalAppointment Parámetro que determina el identificador a verificar
@@ -40,7 +38,6 @@ import java.util.HashMap;
 	public boolean existsById(Integer idMedicalAppointment) {
 		return appointments.containsKey(idMedicalAppointment);
 	}
-
 	/**
      * <b>Descripción: </b> Retorna todas las citas médicas registradas en el sistema <br>
      * @return HashMap con todas las citas médicas
@@ -48,7 +45,6 @@ import java.util.HashMap;
 	public HashMap<Integer, MedicalAppointment> findAll() {
 		return appointments;
 	}
-
 	/**
      * <b>Descripción: </b> Busca y retorna una cita médica por su identificador <br>
      * @param idMedicalAppointment Parámetro que determina el identificador de la cita
@@ -57,5 +53,4 @@ import java.util.HashMap;
 	public MedicalAppointment findById(Integer idMedicalAppointment) {
 		return appointments.get(idMedicalAppointment);
 	}
-
 }

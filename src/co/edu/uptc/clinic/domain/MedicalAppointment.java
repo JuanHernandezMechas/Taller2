@@ -44,7 +44,6 @@ public class MedicalAppointment {
 		this.patient = patient;
 		this.doctor = doctor;
 	}
-	
 	/**
      * 
      * @return idMedicalAppointment Identificador de la cita médica
@@ -52,7 +51,6 @@ public class MedicalAppointment {
 	public Integer getIdMedicalAppointment() {
 		return idMedicalAppointment;
 	}
-	
 	/**
      * 
      * @param idMedicalAppointment Nuevo identificador de la cita médica
@@ -60,7 +58,6 @@ public class MedicalAppointment {
 	public void setIdMedicalAppointment(Integer idMedicalAppointment) {
 		this.idMedicalAppointment = idMedicalAppointment;
 	}
-	
 	/**
      *
      * @return timeAppointment Hora de la cita médica

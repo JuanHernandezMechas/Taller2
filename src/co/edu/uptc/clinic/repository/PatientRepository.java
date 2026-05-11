@@ -26,7 +26,6 @@ public class PatientRepository {
 		this.patients = new HashMap<>();
 		this.registeredEmails = new HashSet<>();
 	}
-
 	/**
      * <b>Descripción: </b> Agrega un paciente al sistema. La validación de
      * unicidad de ID y email es responsabilidad de la capa de servicio <br>
@@ -37,7 +36,6 @@ public class PatientRepository {
 		patients.put(patient.getIdPatient(), patient);
 		return true;
 	}
-
 	/**
      * <b>Descripción: </b> Registra un correo electrónico en el conjunto de
      * emails. Retorna false si el email ya estaba registrado <br>
@@ -47,7 +45,6 @@ public class PatientRepository {
 	public boolean addEmail(String email) {
 		return registeredEmails.add(email);
 	}
-
 	/**
      * <b>Descripción: </b> Verifica si ya existe un paciente registrado con
      * el identificador dado <br>
@@ -57,7 +54,6 @@ public class PatientRepository {
 	public boolean existsById(Integer id) {
 		return patients.containsKey(id);
 	}
-
 	/**
      * <b>Descripción: </b> Retorna todos los pacientes registrados en el sistema <br>
      * @return HashMap con todos los pacientes registrados
@@ -65,7 +61,6 @@ public class PatientRepository {
 	public HashMap<Integer, Patient> findAll() {
 		return patients;
 	}
-
 	/**
      * <b>Descripción: </b> Busca y retorna un paciente por su número de identificación <br>
      * @param idPatient Parámetro que determina el número de identificación del paciente
@@ -74,7 +69,6 @@ public class PatientRepository {
 	public Patient findById(Integer idPatient) {
 		return patients.get(idPatient);
 	}
-
 	/**
      * <b>Descripción: </b> Agrega un medicamento al historial de un paciente
      * validando que el paciente exista y que el medicamento no esté ya registrado <br>
@@ -89,5 +83,4 @@ public class PatientRepository {
 		}
 		return patient.getMedicationHistory().add(medication);
 	}
-
 }
