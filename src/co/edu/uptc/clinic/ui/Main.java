@@ -183,6 +183,22 @@ public void registrarCita() {
         JOptionPane.showMessageDialog(null, "No se pudo registrar. El ID de la cita ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
+/**
+ * <b>Descripción: </b> Solicita al usuario el identificador del paciente y el
+ * nombre del medicamento a agregar en su historial. Muestra un mensaje de éxito
+ * o error según el resultado de la operación <br>
+ */
+
+public void agregarMedicamento() {
+	int idPaciente = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id del paciente:", "Agregar Medicamento", JOptionPane.PLAIN_MESSAGE));
+	String medicamento = JOptionPane.showInputDialog(null, "Ingrese el nombre del medicamento:", "Agregar Medicamento", JOptionPane.PLAIN_MESSAGE);
+	
+	if(patientService.addMedication(idPaciente, medicamento)) {
+		JOptionPane.showMessageDialog(null, "El medicamento ha sido agregado exitosamente.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+	} else {
+		JOptionPane.showMessageDialog(null, "No se pudo agregar el medicamento. El paciente no existe o el medicamento ya estaba registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+	}
+}
 
 }
 	
