@@ -128,7 +128,7 @@ public class Main {
 			JOptionPane.showMessageDialog(null, "No se puedo registrar al paciente. El ID o el email ya existen dentro del sistema", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-}
+
 /**
  * <b>Descripción: </b> Solicita al usuario mediante ventanas emergentes los
  * datos necesarios para registrar un nuevo médico en el sistema. Muestra un
@@ -147,14 +147,42 @@ public void registrarMedico() {
 	String lastName = JOptionPane.showInputDialog(null, "Ingrese los apellidos del médico:", "Registrar Médico", JOptionPane.PLAIN_MESSAGE);
 	String speciality = JOptionPane.showInputDialog(null, "Ingrese la especialidad del médico:", "Registrar Médico", JOptionPane.PLAIN_MESSAGE);
 	int yearsOfExperience = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese los años de experiencia del médico:", "Registrar Médico", JOptionPane.PLAIN_MESSAGE));
-	
 	Doctor doctor = new Doctor(identificationType, medicalId, firstName, lastName, speciality, yearsOfExperience);
-	
 	if(doctorService.addDoctor(doctor)) {
 		JOptionPane.showMessageDialog(null, "Médico registrado exitosamente.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
 	} else {
 		JOptionPane.showMessageDialog(null, "No se puedo registrar al médico. El ID o los datos son inválidos para el sistema", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 }
+/**
+ * <b>Descripción: </b> Solicita al usuario mediante ventanas emergentes los
+ * datos necesarios para registrar una nueva cita médica en el sistema.
+ * Verifica que el paciente y el médico existan antes de crear la cita.
+ * Muestra un mensaje de éxito o error según el resultado del registro 
+ */
+public void registrarCita() {
+	int idCita = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ID de la cita:", "Registrar cita", JOptionPane.PLAIN_MESSAGE));
+	LocalTime hora = LocalTime.parse(JOptionPane.showInputDialog(null, "Ingrese la hora de la cita (formato HH:mm):", "Registrar Cita", JOptionPane.PLAIN_MESSAGE));
+	
+	int idPaciente = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ID del paciente:", "Registrar Cita", JOptionPane.PLAIN_MESSAGE));
+	Patient patient = patientService.findById(idPaciente);
+	if (patient == null) {
+        JOptionPane.showMessageDialog(null, "El paciente con el id " + idPaciente + " no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    int idMedico = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ID del médico:", "Registrar Cita", JOptionPane.PLAIN_MESSAGE));
+    Doctor doctor = doctorService.findById(idMedico);
+    if (doctor == null) {
+        JOptionPane.showMessageDialog(null, "El médico con el id " + idMedico + " no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    MedicalAppointment appointment = new MedicalAppointment(idCita, hora, patient, doctor);
+    if (appointmentService.addAppointment(appointment)) {
+        JOptionPane.showMessageDialog(null, "La cita ha sido registrada exitosamente.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(null, "No se pudo registrar. El ID de la cita ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
 }
 	
