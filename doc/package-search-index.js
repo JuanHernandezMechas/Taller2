@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"co.edu.uptc.clinic.domain"},{"l":"co.edu.uptc.clinic.enums"},{"l":"co.edu.uptc.clinic.repository"},{"l":"co.edu.uptc.clinic.service"},{"l":"co.edu.uptc.clinic.ui"}];updateSearchResults();
