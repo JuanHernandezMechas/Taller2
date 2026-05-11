@@ -1,6 +1,7 @@
 package co.edu.uptc.clinic.ui;
 
 import co.edu.uptc.clinic.service.*;
+import co.edu.uptc.laguito.domain.MedicalAppointment;
 import co.edu.uptc.clinic.domain.*;
 import co.edu.uptc.clinic.enums.*;
 import javax.swing.JOptionPane;
@@ -198,6 +199,35 @@ public void agregarMedicamento() {
 	} else {
 		JOptionPane.showMessageDialog(null, "No se pudo agregar el medicamento. El paciente no existe o el medicamento ya estaba registrado.", "Error", JOptionPane.ERROR_MESSAGE);
 	}
+}
+/**
+ * <b>Descripción: </b> Consulta y muestra la cola de atención con todas las
+ * citas médicas ordenadas primero por hora y en caso de empate por mayor
+ * prioridad del paciente. Si no hay citas registradas muestra un aviso al
+ * usuario <br>
+ */
+public void verColaAtencion(){
+	TreeSet<MedicalAppointment> cola = appointmentService.findAllByTimeAndPriority();
+
+    if (cola.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "No hay citas registradas.", 
+            "Cola de Atención", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+    StringBuilder sb = new StringBuilder("===== Cola de Atención =====\n\n");
+    int numero = 1;
+    for (MedicalAppointment cita : cola) {
+        sb.append(numero++).append(". ")
+          .append("Hora: ").append(cita.getTimeAppointment()).append(" | ")
+          .append("Paciente: ").append(cita.getPatient().getFirstName())
+          .append(" ").append(cita.getPatient().getLastName()).append(" | ")
+          .append("Prioridad: ").append(cita.getPatient().getPriorityEnums()).append(" | ")
+          .append("Médico: ").append(cita.getDoctor().getFirstName())
+          .append(" ").append(cita.getDoctor().getLastName()).append("\n");
+    }
+
+    JOptionPane.showMessageDialog(null, sb.toString(), 
+        "Cola de Atención", JOptionPane.INFORMATION_MESSAGE);
 }
 
 }
