@@ -94,3 +94,39 @@ public class Main {
 			}
 		}
 	}
+	
+	/**
+	 * <b>Descripción: </b> Solicita al usuario mediante ventanas emergentes los
+	 * datos necesarios para registrar un nuevo paciente en el sistema. Muestra un
+	 * mensaje de éxito o error según el resultado del registro <br>
+	 */
+	public void registrarPaciente() {
+		String[] tipos = {"CC - Cédula de ciudadanía", "TI - Tarjeta de identidad", "CE - Cédula de extranjería", "PA - Pasaporte"};
+		int tipoIndex = JOptionPane.showOptionDialog(null, "Seleccione el tipo de identificación:", "Registrar Paciente", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, tipos, tipos[0]);
+		if(tipoIndex == -1) {
+			return;
+		}
+		IdentificationEnum identificationTypeEnums = IdentificationEnum.values()[tipoIndex];
+		
+		int idPatient = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número de identificación:", "Registrar Paciente", JOptionPane.PLAIN_MESSAGE));
+		String firstName = JOptionPane.showInputDialog(null, "Ingrese el nombre del paciente:", "Registrar Paciente", JOptionPane.PLAIN_MESSAGE);
+		String lastName = JOptionPane.showInputDialog(null, "Ingrese los apellidos del paciente:", "Registrar Paciente", JOptionPane.PLAIN_MESSAGE);
+		String email = JOptionPane.showInputDialog(null, "Ingrese el correo electrónico del paciente:", "Registrar Paciente", JOptionPane.PLAIN_MESSAGE);
+		
+		String[] prioridades = {
+				"LOW - Baja", "MEDIUM - Media", "HIGH - Alta", "CRITICAL - Crítica"
+		};
+		int prioridadIndex = JOptionPane.showOptionDialog(null, "Seleccione la prioridad de atención:", "Registrar Paciente", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, prioridades, prioridades[0]);
+		if(prioridadIndex == -1) {
+			return;
+		}
+		PriorityEnum priority = PriorityEnum.values()[prioridadIndex];
+		Patient patient = new Patient(priority, identificationTypeEnums, idPatient, firstName, lastName, email, null);
+		if(patientService.addPatient(patient)) {
+			JOptionPane.showMessageDialog(null, "Paciente registrado exitosamente.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "No se puedo registrar al paciente. El ID o el email ya existen dentro del sistema", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+}
+	
