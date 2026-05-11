@@ -129,4 +129,32 @@ public class Main {
 		}
 	}
 }
+/**
+ * <b>Descripción: </b> Solicita al usuario mediante ventanas emergentes los
+ * datos necesarios para registrar un nuevo médico en el sistema. Muestra un
+ * mensaje de éxito o error según el resultado del registro <br>
+ */
+public void registrarMedico() {
+	String[] tipos = {"CC - Cédula de ciudadanía", "TI - Tarjeta de identidad", "CE - Cédula de extranjería", "PA - Pasaporte"};
+	int tipoIndex = JOptionPane.showOptionDialog(null, "Seleccione el tipo de identificación:", "Registrar Médico", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, tipos, tipos[0]);
+	if(tipoIndex == -1) {
+		return;
+	}
+	IdentificationEnum identificationType = IdentificationEnum.values()[tipoIndex];
+	
+	int medicalId = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id del médico:", "Registrar Médico", JOptionPane.PLAIN_MESSAGE));
+	String firstName = JOptionPane.showInputDialog(null, "Ingrese el nombre del médico:", "Registrar Médico", JOptionPane.PLAIN_MESSAGE);
+	String lastName = JOptionPane.showInputDialog(null, "Ingrese los apellidos del médico:", "Registrar Médico", JOptionPane.PLAIN_MESSAGE);
+	String speciality = JOptionPane.showInputDialog(null, "Ingrese la especialidad del médico:", "Registrar Médico", JOptionPane.PLAIN_MESSAGE);
+	int yearsOfExperience = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese los años de experiencia del médico:", "Registrar Médico", JOptionPane.PLAIN_MESSAGE));
+	
+	Doctor doctor = new Doctor(identificationType, medicalId, firstName, lastName, speciality, yearsOfExperience);
+	
+	if(doctorService.addDoctor(doctor)) {
+		JOptionPane.showMessageDialog(null, "Médico registrado exitosamente.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+	} else {
+		JOptionPane.showMessageDialog(null, "No se puedo registrar al médico. El ID o los datos son inválidos para el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+	}
+}
+}
 	
